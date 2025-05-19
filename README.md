@@ -138,7 +138,7 @@ open up you local host and port
 
 ## Save pass:
 
-REMOVED_SECRET
+<!-- REMOVED_SECRET -->
 
 
 ## Run from terminal:
