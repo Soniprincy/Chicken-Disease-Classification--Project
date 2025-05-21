@@ -25,7 +25,7 @@ stages:
 
 
   training:
-    cmd: python src/cnnClassifier/pipeline/stage_03_training.py
+    cmd: python -m src.cnnClassifier.pipeline.stage_03_training
     deps:
       - src/cnnClassifier/pipeline/stage_03_training.py
       - src/cnnClassifier/components/prepare_callbacks.py

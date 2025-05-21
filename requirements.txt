@@ -1,4 +1,5 @@
-tensorflow
+# tensorflow
+tensorflow-cpu
 pandas 
 dvc
 notebook
@@ -14,4 +15,6 @@ types-PyYAML
 scipy
 Flask
 Flask-Cors
+setuptools>=78.1.1
+pip>=23.3
 -e . 

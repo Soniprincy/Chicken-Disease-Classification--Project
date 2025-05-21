@@ -1,14 +1,9 @@
-
-
-FROM python:3.13-slim
+FROM python:alpine
 
 WORKDIR /app
 
-RUN apt-get update && apt-get upgrade -y && apt-get clean
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
+
+RUN  pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "app.py"]
