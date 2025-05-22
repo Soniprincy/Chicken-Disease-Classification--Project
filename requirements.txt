@@ -1,5 +1,5 @@
-# tensorflow
-tensorflow-cpu
+tensorflow
+# tensorflow-cpu
 pandas 
 dvc
 notebook
@@ -16,5 +16,5 @@ scipy
 Flask
 Flask-Cors
 setuptools>=78.1.1
-pip>=23.3
+# pip>=23.3
 -e . 
