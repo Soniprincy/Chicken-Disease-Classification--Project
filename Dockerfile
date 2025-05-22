@@ -1,9 +1,9 @@
 FROM python:alpine
 
+RUN apt update -y && apt install awscli -y
 WORKDIR /app
 
-COPY . .
+COPY . /app
+RUN pip install -r requirements.txt
 
-RUN  pip install --no-cache-dir -r requirements.txt
-
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
