@@ -105,7 +105,7 @@
 #           exit-code: '0'
 #           severity: 'HIGH,CRITICAL'
 
-name: CI/CD to ECR
+name: CI/CD to AWS ECR
 
 on:
   push:
@@ -116,7 +116,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
@@ -135,6 +135,8 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
+          echo "📦 Repository = '$ECR_REPOSITORY'"
+          echo "🔗 Registry   = '$ECR_REGISTRY'"
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
