@@ -11,6 +11,6 @@ WORKDIR /app
 
 RUN echo "Reached end of Dockerfile"
 
-# CMD ["python", "app.py"]
+CMD ["python", "app.py"]
 
-CMD python app.py
+# CMD python app.py
