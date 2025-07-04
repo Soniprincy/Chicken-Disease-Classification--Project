@@ -1,5 +1,4 @@
 tensorflow
-# tensorflow-cpu
 pandas 
 dvc
 notebook
@@ -14,7 +13,7 @@ joblib
 types-PyYAML
 scipy
 Flask
+flask
 Flask-Cors
-setuptools>=78.1.1
-# pip>=23.3
--e . 
+streamlit
+-e .
