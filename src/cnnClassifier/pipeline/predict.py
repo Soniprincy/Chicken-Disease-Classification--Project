@@ -1,29 +1,67 @@
+# import numpy as np
+# from tensorflow.keras.models import load_model
+# from tensorflow.keras.preprocessing import image
+# import os
+
+
+
+# class PredictionPipeline:
+#     def __init__(self,filename):
+#         self.filename =filename
+
+
+    
+#     def predict(self):
+#         model = load_model(os.path.join("artifacts","training", "model.h5"))
+
+#         imagename = self.filename
+#         test_image = image.load_img(imagename, target_size = (224,224))
+#         test_image = image.img_to_array(test_image)
+#         test_image = np.expand_dims(test_image, axis = 0)
+#         result = np.argmax(model.predict(test_image), axis=1)
+#         print(result)
+
+#         if result[0] == 1:
+#             prediction = 'Healthy'
+#             return [{ "image" : prediction}]
+#         else:
+#             prediction = 'Coccidiosis'
+#             return [{ "image" : prediction}]
+
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
 
-
-
 class PredictionPipeline:
-    def __init__(self,filename):
-        self.filename =filename
+    def __init__(self, filename):
+        self.filename = filename
+        self.model_path = os.path.join("artifacts", "training", "model.h5")
+        self.target_size = (224, 224)
 
-
-    
     def predict(self):
-        model = load_model(os.path.join("artifacts","training", "model.h5"))
+        # Load the trained model
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Model not found at {self.model_path}")
 
-        imagename = self.filename
-        test_image = image.load_img(imagename, target_size = (224,224))
-        test_image = image.img_to_array(test_image)
-        test_image = np.expand_dims(test_image, axis = 0)
-        result = np.argmax(model.predict(test_image), axis=1)
-        print(result)
+        model = load_model(self.model_path)
 
-        if result[0] == 1:
-            prediction = 'Healthy'
-            return [{ "image" : prediction}]
-        else:
-            prediction = 'Coccidiosis'
-            return [{ "image" : prediction}]
+        # Preprocess the image
+        try:
+            img = image.load_img(self.filename, target_size=self.target_size)
+        except Exception as e:
+            raise ValueError(f"Error loading image: {e}")
+
+        img_array = image.img_to_array(img)
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array /= 255.0  # Normalize
+
+        # Predict
+        preds = model.predict(img_array)
+        result = np.argmax(preds, axis=1)
+
+        # Class mapping
+        classes = ["Coccidiosis", "Healthy"]
+        prediction = classes[result[0]]
+
+        return [{ "image": prediction }]
