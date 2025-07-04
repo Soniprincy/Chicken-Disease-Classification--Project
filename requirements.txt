@@ -12,7 +12,6 @@ ensure==1.0.2
 joblib
 types-PyYAML
 scipy
-Flask
 flask
 Flask-Cors
 streamlit
