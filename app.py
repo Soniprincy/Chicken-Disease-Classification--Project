@@ -63,3 +63,4 @@ if uploaded_file is not None:
         pipeline = PredictionPipeline("inputImage.jpg")
         result = pipeline.predict()
         st.success(f"Prediction: {result}")
+
