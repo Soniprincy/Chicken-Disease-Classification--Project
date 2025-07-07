@@ -1,5 +1,6 @@
-tensorflow==2.13.0
-# tensorflow
+python=="3.10.*"
+# tensorflow==2.13.0
+tensorflow==2.16.1
 pandas
 dvc
 notebook
